@@ -8,6 +8,12 @@
 
 #import "LPThirdViewController.h"
 
+@interface LPThirdViewController ()
+
+// Backing store for the table so deleted and moved rows stay consistent.
+@property (strong, nonatomic) NSMutableArray *rows;
+
+@end
 
 @implementation LPThirdViewController
 
@@ -47,9 +53,13 @@
 
 - (void)viewDidLoad
 {
-    self.title = NSLocalizedString(@"Third", @"Third");
-    self.tabBarItem.image = [UIImage imageNamed:@"second"];
     [super viewDidLoad];
+    self.title = NSLocalizedString(@"Third", @"Third");
+
+    self.rows = [NSMutableArray arrayWithCapacity:30];
+    for (NSUInteger i = 0; i < 30; i++) {
+        [self.rows addObject:[NSString stringWithFormat:@"Cell %@", @(i)]];
+    }
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -122,7 +132,7 @@
 {
     
     // Return the number of rows in the section.
-    return 30;
+    return (NSInteger)self.rows.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -136,7 +146,7 @@
         
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Cell %@", @(indexPath.row)];
+    cell.textLabel.text = self.rows[(NSUInteger)indexPath.row];
     
     return cell;
 }
@@ -158,6 +168,7 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        [self.rows removeObjectAtIndex:(NSUInteger)indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }   
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
@@ -167,6 +178,9 @@
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
+    NSString *row = self.rows[(NSUInteger)fromIndexPath.row];
+    [self.rows removeObjectAtIndex:(NSUInteger)fromIndexPath.row];
+    [self.rows insertObject:row atIndex:(NSUInteger)toIndexPath.row];
 }
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {

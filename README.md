@@ -1,6 +1,6 @@
 | master  |  [license](LICENSE) |
 |---------|---------------------|
-|[![Build Status](https://travis-ci.org/calabash/calabash-ios-example.svg?branch=master)](https://travis-ci.org/calabash/calabash-ios-example)| [![License](https://img.shields.io/badge/licence-MIT-blue.svg)](http://opensource.org/licenses/MIT)|
+|[![Build Status](https://travis-ci.org/calabash/calabash-ios-example.svg?branch=master)](https://travis-ci.org/calabash/calabash-ios-example)| [![License](https://img.shields.io/badge/licence-MIT-blue.svg)](https://opensource.org/licenses/MIT)|
 
 ## LPSimpleExample
 
@@ -41,7 +41,7 @@ $ bundle update
 # Make sure you can build the app
 $ make app
 
-# Download the last calabash.framework
+# Download the latest calabash.framework
 $ bundle exec calabash-ios download
 ```
 
@@ -55,7 +55,7 @@ These are the linker flags:
 -ObjC -force_load "$(SOURCE_ROOT)/calabash.framework/calabash" -framework CFNetwork
 ```
 
-Try to build and run on an iOS Simulator from Xcode   In the Console you should see
+Try to build and run on an iOS Simulator from Xcode.  In the Console you should see
 output like this:
 
 ```
@@ -69,7 +69,7 @@ DEBUG CalabashServer:223 | Calabash iOS server version: CALABASH VERSION: 0.16.4
 # Generate a features dir
 $ bundle exec calabash-ios gen
 
-# Tell Calabash where your app is (see Where is are the .app and ipa? below)
+# Tell Calabash where your app is (see "Where are the .app and .ipa?" below)
 $ export APP=Products/app/LPSimpleExample.app
 
 # Try running cucumber
@@ -104,7 +104,7 @@ $ bundle exec calabash-ios console
 
 ### Where are the .app and .ipa?
 
-This project includes a [Run Phase build script](https://github.com/calabash/calabash-ios-example/blob/master/bin/xcode-build-phase/stage-LPSimpleExample-products.sh) that copies binaries built by Xcode to a local `Products/` directory - this is the same directory that the [make rules](https://github.com/calabash/calabash-ios-example/blob/master/Makefile) stage their build products. We encourage you to use this technique to ensure that you are always testing the most recent build of your app - whether it was built with Xcode or from the command line.
+This project includes a [Run Script build phase](https://github.com/calabash/calabash-ios-example/blob/master/bin/xcode-build-phase/stage-LPSimpleExample-products.sh) that copies binaries built by Xcode to a local `Products/` directory - this is the same directory that the [make rules](https://github.com/calabash/calabash-ios-example/blob/master/Makefile) stage their build products. We encourage you to use this technique to ensure that you are always testing the most recent build of your app - whether it was built with Xcode or from the command line.
 
 ## Troubleshooting
 
@@ -140,7 +140,7 @@ Bundle
 <snip>/Debug-iphoneos/CalSmoke.build/Script-F51F2E8E1AB359A6002326D0.sh
 ```
 
-Try again without xpretty to reveal the problem:
+Try again without xcpretty to reveal the problem:
 
 ```
 $ XCPRETTY=0 make ipa

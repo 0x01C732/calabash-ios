@@ -70,7 +70,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-  [super viewDidAppear:YES];
+  [super viewDidAppear:animated];
 
   self.locationManager.distanceFilter = kCLDistanceFilterNone; //Whenever we move
   self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -81,7 +81,7 @@
   MKCoordinateRegion region = { { 0.0, 0.0 }, { 0.0, 0.0 } };
   region.center.latitude = self.locationManager.location.coordinate.latitude;
   region.center.longitude = self.locationManager.location.coordinate.longitude;
-  region.span.longitudeDelta = 0.005f;
+  region.span.latitudeDelta = 0.005f;
   region.span.longitudeDelta = 0.005f;
   [self.mapView setRegion:region animated:YES];
 
