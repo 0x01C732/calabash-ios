@@ -108,7 +108,10 @@ $ bundle exec calabash-ios console
 The app shows a lock screen at launch and every time it returns from the
 background. It unlocks with Face ID / Touch ID, falling back to the device
 passcode (iOS 9+). The lock lives in `LPSimpleExample/LPLockViewController.m`
-and is wired up in `LPAppDelegate.m`.
+and is wired up in `LPAppDelegate.m`. It uses the dark green brand palette
+(defined at the top of `LPLockViewController.m`) and animates in on launch,
+pulses while locked, shakes on a failed attempt and opens the padlock on
+unlock. Animations fall back to simple fades when Reduce Motion is on.
 
 * **Release builds** stay locked if the device has no passcode set.
 * **Debug builds** (the ones Calabash drives) skip the lock when the device
