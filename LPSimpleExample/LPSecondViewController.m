@@ -7,7 +7,6 @@
 //
 #import <MapKit/MapKit.h>
 #import "LPSecondViewController.h"
-#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 @implementation LPSecondViewController
 
@@ -43,12 +42,13 @@
   self.mapView.delegate = self;
   self.locationManager = [[CLLocationManager alloc] init];
   self.locationManager.delegate = self;
-#ifdef __IPHONE_8_0
-  if(IS_OS_8_OR_LATER) {
+  // requestAlwaysAuthorization only exists on iOS 8+.  Detect the API
+  // instead of parsing -[UIDevice systemVersion], which is not a number
+  // (e.g. "8.0.2", "10.3.1") and breaks float comparisons.
+  if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
     // Use one or the other, not both. Depending on what you put in info.plist
     [self.locationManager requestAlwaysAuthorization];
   }
-#endif
   [self.locationManager startUpdatingLocation];
 
   self.mapView.showsUserLocation = YES;
