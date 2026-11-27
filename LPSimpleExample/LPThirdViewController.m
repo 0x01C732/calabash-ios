@@ -85,15 +85,24 @@
 {
     [super viewDidAppear:animated];
   //-- Set Notification
-  if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+  // Detect the iOS 8+ API instead of parsing -[UIDevice systemVersion].
+  UIApplication *application = [UIApplication sharedApplication];
+  if ([application respondsToSelector:@selector(registerUserNotificationSettings:)])
   {
-    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    UIUserNotificationType types = (UIUserNotificationTypeSound |
+                                    UIUserNotificationTypeAlert |
+                                    UIUserNotificationTypeBadge);
+    [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:types categories:nil]];
+    [application registerForRemoteNotifications];
   }
   else
   {
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-     (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
+    // iOS 7: the pre-iOS 8 API takes UIRemoteNotificationType values.
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    [application registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+#pragma clang diagnostic pop
   }
 
 }
