@@ -103,6 +103,19 @@ $ bundle exec calabash-ios console
 | [iOS WebView Test App](https://github.com/calabash/ios-webview-test-app) | Demonstrates how to interact with UIWebView and WKWebView|
 | [Getting Help](https://github.com/calabash/calabash-ios/wiki) | The Calabash iOS Wiki |
 
+### App lock screen
+
+The app shows a lock screen at launch and every time it returns from the
+background. It unlocks with Face ID / Touch ID, falling back to the device
+passcode (iOS 9+). The lock lives in `LPSimpleExample/LPLockViewController.m`
+and is wired up in `LPAppDelegate.m`.
+
+* **Release builds** stay locked if the device has no passcode set.
+* **Debug builds** (the ones Calabash drives) skip the lock when the device
+  can't authenticate. Simulators have no passcode by default, so Calabash
+  runs on a simulator aren't blocked. On a physical device with a passcode,
+  the lock will appear and has to be dismissed before the tests continue.
+
 ### Where are the .app and .ipa?
 
 This project includes a [Run Script build phase](https://github.com/calabash/calabash-ios-example/blob/master/bin/xcode-build-phase/stage-LPSimpleExample-products.sh) that copies binaries built by Xcode to a local `Products/` directory - this is the same directory that the [make rules](https://github.com/calabash/calabash-ios-example/blob/master/Makefile) stage their build products. We encourage you to use this technique to ensure that you are always testing the most recent build of your app - whether it was built with Xcode or from the command line.
