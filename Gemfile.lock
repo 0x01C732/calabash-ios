@@ -62,7 +62,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  calabash-cucumber (>= 0.16, < 2.0)
+  calabash-cucumber (= 0.20.4)
   luffa
   retriable (~> 2.0)
   xcpretty

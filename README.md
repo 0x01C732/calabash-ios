@@ -16,7 +16,8 @@ the **xcpretty** and **Code Signing** sections for debugging tips.
 * Xcode 6 or 7
 * iOS Devices >= 7.1
 * iOS Simulators >= 8.0
-* ruby >= 2.0 (latest is preferred)
+* ruby 2.0 - 2.6 (calabash-cucumber 0.20.4 depends on json 1.8, which does not build on ruby 2.7+)
+* Bundler 1.x (calabash-cucumber 0.20.4 does not support Bundler 2)
 
 We recommend a managed ruby environment like rbenv or rvm.  If you are
 installing gems with sudo, please see our [guide on why you should stop](https://github.com/calabash/calabash-ios/wiki/Best-Practice:--Never-install-gems-with-sudo).
@@ -24,7 +25,7 @@ installing gems with sudo, please see our [guide on why you should stop](https:/
 Bundler needs to be installed.
 
 ```
-$ gem install bundler
+$ gem install bundler -v "~> 1.17"
 ```
 
 ### Step 1: Install calabash.framework
@@ -35,13 +36,13 @@ page of the Calabash iOS wiki.  To get started quickly, we'll use the
 _Debug Config_ approach.
 
 ```
-# Install the necessary gems
-$ bundle update
+# Install the pinned gems (use install, not update, to keep the versions in Gemfile.lock)
+$ bundle install
 
 # Make sure you can build the app
 $ make app
 
-# Download the latest calabash.framework
+# Download the calabash.framework that matches the calabash-cucumber gem
 $ bundle exec calabash-ios download
 ```
 
@@ -60,7 +61,7 @@ output like this:
 
 ```
 DEBUG CalabashServer:222 | Creating the server: <LPHTTPServer: 0x7fe97a507ef0>
-DEBUG CalabashServer:223 | Calabash iOS server version: CALABASH VERSION: 0.16.4
+DEBUG CalabashServer:223 | Calabash iOS server version: CALABASH VERSION: 0.20.4
 ```
 
 ### Step 2: Run cucumber
