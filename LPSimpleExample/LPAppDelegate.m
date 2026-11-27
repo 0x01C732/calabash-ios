@@ -14,6 +14,18 @@
 
 #import "LPThirdViewController.h"
 #import "LPFourthViewController.h"
+#import "LPLockViewController.h"
+
+@interface LPAppDelegate () <LPLockViewControllerDelegate>
+// Separate window above the main one, so the lock covers every tab and any
+// modal, and is in place when iOS snapshots the app for the app switcher.
+@property (strong, nonatomic) UIWindow *lockWindow;
+@property (strong, nonatomic) LPLockViewController *lockViewController;
+// Set once the prompt has been shown for the current lock. The prompt itself
+// makes the app resign and regain active state, so without this a cancelled
+// prompt would reappear forever.
+@property (assign, nonatomic) BOOL promptedSinceLock;
+@end
 
 @implementation LPAppDelegate
 
@@ -39,6 +51,8 @@
 
   //--- your custom code
 
+    [self lock];
+
     return YES;
 }
 
@@ -54,6 +68,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     NSLog(@"ENTERBACK");
+    [self lock];
     /*
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
@@ -71,6 +86,10 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     NSLog(@"BECOMEACTIVE");
+    if ([self isLocked] && !self.promptedSinceLock) {
+        self.promptedSinceLock = YES;
+        [self.lockViewController authenticate];
+    }
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
@@ -83,6 +102,35 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+#pragma mark - Lock screen
+
+- (void)lock
+{
+    if (self.lockWindow == nil) {
+        self.lockViewController = [[LPLockViewController alloc] init];
+        self.lockViewController.delegate = self;
+
+        self.lockWindow = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.lockWindow.windowLevel = UIWindowLevelNormal + 1;
+        self.lockWindow.rootViewController = self.lockViewController;
+    }
+
+    [self.lockViewController reset];
+    self.promptedSinceLock = NO;
+    [self.lockWindow makeKeyAndVisible];
+}
+
+- (BOOL)isLocked
+{
+    return self.lockWindow != nil && !self.lockWindow.hidden;
+}
+
+- (void)lockViewControllerDidUnlock:(LPLockViewController *)controller
+{
+    self.lockWindow.hidden = YES;
+    [self.window makeKeyWindow];
 }
 
 /*

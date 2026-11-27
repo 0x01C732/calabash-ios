@@ -21,6 +21,8 @@
 		B1497426144B4CBE00E6EE79 /* LPThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B1497425144B4CBE00E6EE79 /* LPThirdViewController.m */; };
 		B19151CD14549E1200A70274 /* LPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B19151CC14549E1200A70274 /* LPAppDelegate.m */; };
 		B19151D314549ED100A70274 /* LPFourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B19151D114549ED100A70274 /* LPFourthViewController.m */; };
+		C0FFEE0000000000000000A3 /* LPLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0FFEE0000000000000000A2 /* LPLockViewController.m */; };
+		C0FFEE0000000000000000A5 /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0FFEE0000000000000000A4 /* LocalAuthentication.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B1FBB9F719CFDF1400EE03CE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ba062f8db2cc162e28bbeebc /* CFNetwork.framework */; };
 		B1FBB9F919CFDF2100EE03CE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1FBB9F819CFDF2100EE03CE /* Security.framework */; };
 		F55F26EA1BD8ED0E00CA572D /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F55F26E91BD8ED0E00CA572D /* Image.xcassets */; };
@@ -46,6 +48,9 @@
 
 /* Begin PBXFileReference section */
 		B126C4C01A0D20EB005338E8 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C0FFEE0000000000000000A1 /* LPLockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLockViewController.h; sourceTree = "<group>"; };
+		C0FFEE0000000000000000A2 /* LPLockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLockViewController.m; sourceTree = "<group>"; };
+		C0FFEE0000000000000000A4 /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		B137ADD2143F6EBF007184CB /* LPSimpleExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LPSimpleExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B137ADD6143F6EBF007184CB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B137ADD8143F6EBF007184CB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -94,6 +99,7 @@
 				B137ADD7143F6EBF007184CB /* UIKit.framework in Frameworks */,
 				B137ADD9143F6EBF007184CB /* Foundation.framework in Frameworks */,
 				B137ADDB143F6EBF007184CB /* CoreGraphics.framework in Frameworks */,
+				C0FFEE0000000000000000A5 /* LocalAuthentication.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +143,7 @@
 				B137ADD8143F6EBF007184CB /* Foundation.framework */,
 				B137ADDA143F6EBF007184CB /* CoreGraphics.framework */,
 				ba062f8db2cc162e28bbeebc /* CFNetwork.framework */,
+				C0FFEE0000000000000000A4 /* LocalAuthentication.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -157,6 +164,8 @@
 				B1497425144B4CBE00E6EE79 /* LPThirdViewController.m */,
 				B19151D014549ED100A70274 /* LPFourthViewController.h */,
 				B19151D114549ED100A70274 /* LPFourthViewController.m */,
+				C0FFEE0000000000000000A1 /* LPLockViewController.h */,
+				C0FFEE0000000000000000A2 /* LPLockViewController.m */,
 				B137ADDD143F6EBF007184CB /* Supporting Files */,
 			);
 			path = LPSimpleExample;
@@ -343,6 +352,7 @@
 				B1497426144B4CBE00E6EE79 /* LPThirdViewController.m in Sources */,
 				B19151CD14549E1200A70274 /* LPAppDelegate.m in Sources */,
 				B19151D314549ED100A70274 /* LPFourthViewController.m in Sources */,
+				C0FFEE0000000000000000A3 /* LPLockViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
